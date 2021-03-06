@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>compile编译</title>
+</head>
+<body>
+    <div id="app">
+        <div>姓名：{{ name }} </div>
+        <div>性别：{{ sex }}</div>
+        <div>属性：{{ attribute.person }} {{  attribute.sex }}</div>
+    </div>
+</body>
+<script>
+    // 创建一个compile类
+    class Compile {
+        constructor (el, vm) {
+            this.el = this.isElementNode(el) ? el : document.querySelector(el);
+            this.vm = vm;
+            // 获取文档碎片，这样操作DOM会减少回流与重绘 提高性能
+            const fragment = this.createFragment(this.el)
+
+            // 将模板碎片放入到根元素中
+            this.el.appendChild(fragment)
+        }
+        // 创建一个模板碎片
+        createFragment (el) {
+            const fragment = document.createDocumentFragment();
+            let firstChild;
+            while(firstChild = el.firstChild) {
+                fragment.appendChild(firstChild);
+            }
+            return fragment;
+        }
+        // 开始编译所有的子级节点
+        compileChilds (el) {
+            const childs = el.childNodes
+            console.log(childs)
+        }
+        // 判断是不是一个node节点
+        isElementNode (node) {
+            return node.nodeType === 1;
+        }
+    }
+    // 创建一个vue类
+    class Mvue {
+        constructor(options) {
+            this.$el = options.el;
+            this.$data = options.data;
+            this.$options = options;
+            new Compile(this.$el, this)
+        }    
+    }
+    new Mvue({
+        el: '#app',
+        data: {
+            name: '刘洋',
+            sex: '男',
+            attribute: {
+                person: '人类',
+                sex: '男性人类',
+            },
+        },
+    })
+</script>
+</html>

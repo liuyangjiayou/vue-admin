@@ -1,0 +1,39 @@
+/* 重置样式 *号效率低后期需要完善 */
+*{margin: 0;padding: 0};
+ul,li{list-style: none};
+a{text-decoration: none};
+
+
+/* 定义变量 */
+$blue : #1890ff;
+
+
+
+
+.vm{vertical-align: middle};
+.flex{ //flex布局
+    display: flex;
+}
+.align-center{ //横向中心对齐
+    align-items: center;
+}
+.justify-space-between{ //两侧对齐
+    justify-content: space-between;
+}
+.cursor{
+    cursor: pointer;
+}
+.ell{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+}
+
+.cblue{
+    color: $blue;
+}
+.hover-cblue{
+    &:hover{
+       color: $blue; 
+    }
+}
