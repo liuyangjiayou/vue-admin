@@ -1,6 +1,7 @@
 <template>
   <div>
-    我是page4
+    <h3>我是page4</h3>
+    <el-input type="text" v-model="page4" />
   </div>
 </template>
 
@@ -11,7 +12,7 @@
     props:[''],
     data () {
       return {
-
+        page4: '',
       };
     },
 

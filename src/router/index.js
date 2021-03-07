@@ -5,8 +5,9 @@ import store from '@/store/store'
 
 // import { notRouter, errRouter, asyncRouter } from './router'
 import { notRouter, asyncRouter2,  errRouter } from './router'
+console.log(notRouter);
 Vue.use(VueRouter)
-// 去除路由的数据
+// 取出路由的数据
 const routerData = store.getters.routerData;
 // 将数据变为menu菜单
 store.dispatch('router/setMenuData', routerData)
@@ -36,10 +37,21 @@ function resetRouter (routerData, routerConfig, routes) {
     }
   });
 }
+console.log(routes, '刘杨');
 // 使用add方式将路由添加到配置项里面
 router.addRoutes([
   ...routes,
   ...errRouter,
 ]);
+// 全局解析守卫
+router.beforeResolve((to, from, next) => {
+  console.log(to, from, next, '刘杨');
+  let { meta, name } = to;
+  console.log(name);
+  store.dispatch('keepAlive/setKeepAliveArray', name);
+  store.dispatch('keepAlive/setTags', { meta, name });
+  console.log({ meta, name })
+  next();
+});
 // 导出路由
-export default router
+export default router;

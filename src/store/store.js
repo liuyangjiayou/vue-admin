@@ -6,11 +6,14 @@ import getters from './getters'
 import config from './modules/config'
 // 路由数据
 import router from './modules/router'
+// keepAlive
+import keepAlive from './modules/keepAlive'
 let store = new Vuex.Store({
   strict: true,
   modules: {
     config,
     router,
+    keepAlive,
   },
   getters,
 });

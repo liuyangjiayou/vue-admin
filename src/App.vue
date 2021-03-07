@@ -25,13 +25,20 @@
         'width' : `calc(100% - ${isCollapse ? menuSetting.smallWidth : menuSetting.width})`}">
           <div class="flex align-center justify-space-between admin-tag-list">
             <el-tag class="cursor" effect="plain">首页</el-tag>
-            <el-tag class="cursor" closable effect="plain">首页</el-tag>
-            <el-tag class="cursor" closable effect="plain">首页</el-tag>
-            <el-tag class="cursor" closable effect="plain">首页</el-tag>
+            <el-tag 
+              v-for="item in tabs" 
+              :key="item.name" 
+              :class="['cursor']" 
+              closable
+              :type="routerName === item.name ? `success` : 'info'"
+              effect="plain"
+              @click="tagClick(item)"
+            >
+              {{ item.meta.title }}
+            </el-tag>
           </div>
           <div class="admin-tag-btn">
             <el-dropdown @command="handleTag">
-             
               <span class="el-dropdown-link cursor hover-cblue">
                  更多操作<i class="el-icon-arrow-down el-icon--right"></i>
               </span>
@@ -84,7 +91,7 @@
             :collapse-transition="menuSetting.collapseTransition"
             :active-text-color="menuSetting.activeTextColor"
             @open="handleOpen"
-            @close="handleClose" 
+            @close="handleClose"
             @select="handleSelect"
             :collapse="isCollapse"
           >
@@ -95,7 +102,10 @@
       <!-- 视图可视区 -->
       <div class="admin-wrap" :style="{'margin-left': isCollapse ? menuSetting.smallWidth : menuSetting.width,'padding': menuSetting.viewMargin}">
         <div class="admin-page-view">
-          <router-view/>
+          <!-- <router-view/> -->
+          <keep-alive :include="keepAliveArray">
+            <router-view/>
+          </keep-alive>
         </div>
       </div>
     </div>
@@ -119,8 +129,14 @@
     computed: {
       ...mapGetters([
         'isCollapse',
-        'menuList'
-      ])
+        'menuList',
+        'keepAliveArray',
+        'tabs',
+      ]),
+      routerName() {
+        let { name } = this.$route
+        return name;
+      },
     },
 
     beforeMount() {},
@@ -135,6 +151,12 @@
       /* 操作tag标签 */
       handleTag(command){
         console.log(command)
+      },
+      // 点击tag面签的时候
+      tagClick (data) {
+        if (this.$route.name !== data.name) { 
+          this.$router.push({ name: data.name });
+        }
       },
       handleSelect(key, keyPath){
        console.log(key, keyPath);

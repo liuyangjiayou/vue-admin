@@ -8,9 +8,9 @@
         </template>
         <MenuTree :menuData="value.childs"/>
       </el-submenu>
-      <el-menu-item v-else-if="(!value.childs || value.childs.length <= 0) && value.hidden === 0" :index="value.id" :key="value.id">
+      <el-menu-item v-else-if="(!value.childs || value.childs.length <= 0) && value.hidden === 0" :index="value.id" :key="value.id"  @click.native="router(value)">
          <i :class="value.icon"/>
-        <span slot="title" :menuData="JSON.stringify(value)" @click="router(value)">{{ value.title }}</span>
+        <span slot="title" :menuData="JSON.stringify(value)">{{ value.title }}</span>
       </el-menu-item>
     </template>
   </fragment>
@@ -21,8 +21,9 @@ export default {
   props: ['menuData'],
   methods:{
     router(value) {
-      console.log(value);
-      this.$router.push({ name: value.name});
+      if (this.$route.name !== value.name) { 
+        this.$router.push({ name: value.name});
+      }
     }
   },
 }

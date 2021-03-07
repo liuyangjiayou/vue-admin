@@ -17,27 +17,32 @@ export const asyncRouter = [
     {
         path: '/compile',
         name: 'Compile',
-        component: Compile
+        component: Compile,
     },
     {
         path: '/page1',
         name: 'Page1',
-        component: () => import(/* webpackChunkName: "page1" */ '../views/page1.vue')
+        component: () => import(/* webpackChunkName: "page1" */ '../views/page1.vue'),
+    },
+    {
+      path: '/page1_1',
+      name: 'Page1_1',
+      component: () => import(/* webpackChunkName: "page1" */ '../views/page1/page1_1.vue'),
     },
     {
         path: '/page2',
         name: 'Page2',
-        component: () => import(/* webpackChunkName: "page2" */ '../views/page2.vue')
+        component: () => import(/* webpackChunkName: "page2" */ '../views/page2.vue'),
     },
     {
         path: '/page3',
         name: 'Page3',
-        component: () => import(/* webpackChunkName: "page3" */ '../views/page3.vue')
+        component: () => import(/* webpackChunkName: "page3" */ '../views/page3.vue'),
     },
     {
         path: '/page4',
         name: 'Page4',
-        component: () => import(/* webpackChunkName: "page4" */ '../views/page4.vue')
+        component: () => import(/* webpackChunkName: "page4" */ '../views/page4.vue'),
     },
     {
         path: '/about',
@@ -51,12 +56,20 @@ export const asyncRouter = [
 // 动态路由配置项
 export const asyncRouter2 = {
     Compile: {
-        path: '/compile',
-        component: () => import(/* webpackChunkName: "compile" */ '../views/vue/compile.vue')
+      path: '/compile',
+      component: () => import(/* webpackChunkName: "compile" */ '../views/vue/compile.vue')
+    },
+    Observer: {
+      path: '/observer/:id',
+      component: () => import(/* webpackChunkName: "compile" */ '../views/vue/observer.vue') 
     },
     Page1: {
-        path: '/page1',
-        component:  () => import(/* webpackChunkName: "page1" */ '../views/page1.vue')
+      path: '/page1',
+      component:  () => import(/* webpackChunkName: "page1" */ '../views/page1.vue')
+    },
+    Page1_1: {
+      path: '/page1_1',
+      component: () => import(/* webpackChunkName: "page1" */ '../views/page1/page1_1.vue'),
     },
     Page2: {
         path: '/page2',

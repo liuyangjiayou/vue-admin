@@ -1,19 +1,18 @@
 <template>
   <div>
-    <h3>我是page1</h3>
-    <el-input type="text" v-model="page1" />
+    我是observer
+    <el-input v-model="observer" />
   </div>
 </template>
 
 <script>
 
   export default {
-    name:'page1',
+    name:'',
     props:[''],
-    
     data () {
       return {
-        page1: '',
+        observer: '',
       };
     },
 

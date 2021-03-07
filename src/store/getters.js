@@ -5,4 +5,8 @@ export default {
     menuList: state => state.router.menuList,
     // 后台拿过来的tree数据
     routerData: state => state.router.routerData,
+    // 当前是否缓存的数组
+    keepAliveArray: state => state.keepAlive.setKeepAliveArray,
+    // 获取当前tap标签
+    tabs: state => state.keepAlive.tabs,
 }
