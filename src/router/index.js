@@ -46,6 +46,7 @@ router.addRoutes([
 // 全局解析守卫
 router.beforeResolve((to, from, next) => {
   let { meta, name, fullPath } = to;
+  console.log( meta, name, fullPath )
   store.dispatch('keepAlive/setKeepAliveArray', name);
   store.dispatch('tag/set', { meta, name, fullPath });
   next();
