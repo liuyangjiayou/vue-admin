@@ -8,12 +8,15 @@ import config from './modules/config'
 import router from './modules/router'
 // keepAlive
 import keepAlive from './modules/keepAlive'
+// tag
+import tag from './modules/tag'
 let store = new Vuex.Store({
   strict: true,
   modules: {
     config,
     router,
     keepAlive,
+    tag,
   },
   getters,
 });

@@ -13,7 +13,7 @@
             }" @click="handleMenu"></i>
           </li>
           <li><i class="el-icon-refresh-right cursor"></i></li>
-        </ul>  
+        </ul>
         <ul class="admin-header-right flex align-center justify-space-between">
           <li><i class="el-icon-s-fold cursor"></i></li>
           <li><el-avatar size="large" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"></el-avatar></li>
@@ -25,14 +25,15 @@
         'width' : `calc(100% - ${isCollapse ? menuSetting.smallWidth : menuSetting.width})`}">
           <div class="flex align-center justify-space-between admin-tag-list">
             <el-tag class="cursor" effect="plain">首页</el-tag>
-            <el-tag 
-              v-for="item in tabs" 
-              :key="item.name" 
-              :class="['cursor']" 
+            <el-tag
+              v-for="item in tags"
+              :key="item.name"
+              :class="['cursor']"
               closable
               :type="routerName === item.name ? `success` : 'info'"
               effect="plain"
               @click="tagClick(item)"
+              @close="tagClose(item)"
             >
               {{ item.meta.title }}
             </el-tag>
@@ -53,7 +54,7 @@
           </div>
       </div>
       <!-- 左侧导航区 -->
-      <div class="admin-menu-wrap" 
+      <div class="admin-menu-wrap"
       :style="{
         'width' : isCollapse ? menuSetting.smallWidth : menuSetting.width,
         'background-color' : menuSetting.backgroundColor,
@@ -64,16 +65,16 @@
           'text-align' : 'center',
           'border-bottom' :  menuSetting.logoBorder ? '1px solid #fff' : 'none'
           }">
-            <a href=""  
+            <a href=""
             :style="{
                 'background-color' : menuSetting.logoBackgroundColor,
                 'color' : menuSetting.logoColor,
                 'font-size' : menuSetting.logoFontSize,
                 'height' : menuSetting.logoHeight,
                 'line-height' : menuSetting.logoHeight,
-                
+
               }">
-              <i class="el-icon-s-home vm" 
+              <i class="el-icon-s-home vm"
               :style="{
                 'font-size' : menuSetting.logoIconSize,
               }"></i>
@@ -104,7 +105,7 @@
         <div class="admin-page-view">
           <!-- <router-view/> -->
           <keep-alive :include="keepAliveArray">
-            <router-view/>
+            <router-view :key="$route.fullPath" />
           </keep-alive>
         </div>
       </div>
@@ -131,7 +132,7 @@
         'isCollapse',
         'menuList',
         'keepAliveArray',
-        'tabs',
+        'tags',
       ]),
       routerName() {
         let { name } = this.$route
@@ -141,7 +142,9 @@
 
     beforeMount() {},
 
-    mounted() {},
+    mounted() {
+      this.$store.dispatch('tag/init');
+    },
 
     methods: {
       /* 展开与隐藏 */
@@ -154,9 +157,13 @@
       },
       // 点击tag面签的时候
       tagClick (data) {
-        if (this.$route.name !== data.name) { 
-          this.$router.push({ name: data.name });
+        if (this.$route.name !== data.name) {
+          this.$router.push(data.fullPath);
         }
+      },
+      // 关闭tag面签的时候
+      tagClose (data) {
+        console.log(data, 'hahahah');
       },
       handleSelect(key, keyPath){
        console.log(key, keyPath);
@@ -203,7 +210,7 @@
   background: #fff;
   transition: .3s;
   li+li{
-    margin-left: 10px;    
+    margin-left: 10px;
   }
   i{
     font-size: 24px;

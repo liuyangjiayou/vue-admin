@@ -45,12 +45,9 @@ router.addRoutes([
 ]);
 // 全局解析守卫
 router.beforeResolve((to, from, next) => {
-  console.log(to, from, next, '刘杨');
-  let { meta, name } = to;
-  console.log(name);
+  let { meta, name, fullPath } = to;
   store.dispatch('keepAlive/setKeepAliveArray', name);
-  store.dispatch('keepAlive/setTags', { meta, name });
-  console.log({ meta, name })
+  store.dispatch('tag/set', { meta, name, fullPath });
   next();
 });
 // 导出路由

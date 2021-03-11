@@ -7,6 +7,6 @@ export default {
     routerData: state => state.router.routerData,
     // 当前是否缓存的数组
     keepAliveArray: state => state.keepAlive.setKeepAliveArray,
-    // 获取当前tap标签
-    tabs: state => state.keepAlive.tabs,
+    // 获取当前tags标签
+    tags: state => state.tag.tags,
 }
