@@ -1,18 +1,18 @@
 <template>
   <div>
-    <h3>我是page2</h3>
-    <el-input type="text" v-model="page2" />
+     <h3>我是page1-1</h3>
+    <el-input type="text" v-model="page11" />
   </div>
 </template>
 
 <script>
 
   export default {
-    name:'page2',
+    name:'Page1_1',
     props:[''],
     data () {
       return {
-        page2: '',
+        page11: '',
       };
     },
 

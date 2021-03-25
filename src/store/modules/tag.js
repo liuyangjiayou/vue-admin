@@ -25,8 +25,16 @@ export default {
   },
   actions: {
     // 设置数组
-    set ({ commit }, tag) {
+    set ({ commit, state}, tag) {
+      // 当前如果tag数组里面有这个一项那么我们就不需要添加了
+      const diffTag = state.tags.filter(item => item.fullPath === tag.fullPath);
+      if (diffTag.length) return;
       commit('SET', tag);
+    },
+    // 删除数组
+    remove ({ dispatch, commit}, tag) {
+      dispatch('keepAlive/remove', tag, { root: true });
+      commit('REMOVE', tag);
     },
     init ({ commit }) {
       const tags = cache.get('tag');

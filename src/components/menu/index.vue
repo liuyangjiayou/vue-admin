@@ -77,7 +77,14 @@
 
     mounted() {},
 
-    methods: {},
+    methods: {
+      // 当menu打开的时候
+      handleOpen () {},
+      // 当menu关闭的时候
+      handleClose () {},
+      // 当
+      handleSelect () {},
+    },
 
     watch: {}
 

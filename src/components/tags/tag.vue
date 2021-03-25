@@ -5,14 +5,14 @@
         <div class="flex align-center justify-space-between admin-tag-list">
           <el-tag class="cursor" effect="plain">首页</el-tag>
           <el-tag
-            v-for="item in tags"
-            :key="item.name"
+            v-for="(item, index) in tags"
+            :key="item.fullPath"
             :class="['cursor']"
             closable
-            :type="routerName === item.name ? `success` : 'info'"
+            :type="$route.fullPath === item.fullPath ? `success` : 'info'"
             effect="plain"
             @click="tagClick(item)"
-            @close="tagClose(item)"
+            @close="tagClose(item, index)"
           >
             {{ item.meta.title }}
           </el-tag>
@@ -55,6 +55,9 @@
         'keepAliveArray',
         'tags',
       ]),
+      curFullPath() {
+        return this.$route.fullPath;
+      }
     },
 
     beforeMount() {},
@@ -62,6 +65,27 @@
     mounted() {},
 
     methods: {
+      /* 点击标签的时候需要跳转到当前的路由 */
+      tagClick (router) {
+        if (this.curFullPath === router.fullPath) return;
+        this.$router.push({ path: router.fullPath });
+
+      },
+      /* 关闭标签的时候 */
+      tagClose (router, index) {
+        // 先去删除数组中的一个
+        this.$store.dispatch('tag/remove', router);
+        // 当删除完一个的时候看一下当的数组长度
+        if (!this.tags.length) {
+          this.$router.push({ path: '/' });
+          return
+        }
+        const tag = this.tags[index];
+        const path = tag ? tag.fullPath : this.tags[index - 1].fullPath;
+        if (path !== this.curFullPath) {
+          this.$router.push({ path: path });
+        }
+      },
       /* 操作tag标签 */
       handleTag(command){
         console.log(command)

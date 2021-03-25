@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // import Home from '../views/Home.vue'
+
 import store from '@/store/store'
 
 // import { notRouter, errRouter, asyncRouter } from './router'
@@ -15,7 +16,7 @@ store.dispatch('router/setMenuData', routerData)
 const router = new VueRouter({
   mode: 'hash',
   base: process.env.BASE_URL,
-  routes: notRouter,
+  routes: [],
 });
 // 定义 一个路由数组 用来存放处理之后的新路由
 let routes = [];
@@ -37,17 +38,21 @@ function resetRouter (routerData, routerConfig, routes) {
     }
   });
 }
-console.log(routes, '刘杨');
+console.log(routes);
 // 使用add方式将路由添加到配置项里面
 router.addRoutes([
-  ...routes,
+  {
+    path: '/',
+    redirect: '/compile',
+    component: () => import('@/components/layout/index.vue'),
+    children: [...routes]
+  },
   ...errRouter,
 ]);
 // 全局解析守卫
 router.beforeResolve((to, from, next) => {
   let { meta, name, fullPath } = to;
-  console.log( meta, name, fullPath )
-  store.dispatch('keepAlive/setKeepAliveArray', name);
+  store.dispatch('keepAlive/setKeepAliveArray', to);
   store.dispatch('tag/set', { meta, name, fullPath });
   next();
 });

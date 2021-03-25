@@ -14,6 +14,7 @@ export default {
             childs : [],
             meta: {
               title: '首页',
+              keepAlive: true,
             },
           },
           {
@@ -24,6 +25,7 @@ export default {
             hidden: 0,
             meta: {
               title: 'vue源码学习',
+              keepAlive: true,
             },
             childs : [
               {
@@ -36,6 +38,7 @@ export default {
                 childs : [],
                 meta: {
                   title: 'compile解析',
+                  keepAlive: true,
                 },
               },
               {
@@ -48,6 +51,7 @@ export default {
                 childs : [],
                 meta: {
                   title: 'Observer',
+                  keepAlive: true,
                 },
               },
             ],
@@ -69,11 +73,13 @@ export default {
                 childs : [],
                 meta: {
                   title: 'page1_1',
+                  keepAlive: true,
                 },
               }
             ],
             meta: {
               title: '单页面',
+              keepAlive: true,
             },
           },
           {
@@ -85,6 +91,7 @@ export default {
             childs : [],
             meta: {
               title: '一级页面',
+              keepAlive: true,
             },
           },
           {
@@ -96,6 +103,7 @@ export default {
             childs : [],
             meta: {
               title: '两级页面',
+              keepAlive: true,
             },
           },
           {
@@ -107,6 +115,7 @@ export default {
             childs : [],
             meta: {
               title: '多级页面',
+              keepAlive: true,
             },
           }
       ],

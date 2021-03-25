@@ -6,7 +6,9 @@ export default {
     // 后台拿过来的tree数据
     routerData: state => state.router.routerData,
     // 当前是否缓存的数组
-    keepAliveArray: state => state.keepAlive.setKeepAliveArray,
+    keepAliveArray: state => state.keepAlive.keepAliveArray,
+    // 获取当前储存住的路由
+    keepAliveOption: state => state.keepAlive.keepAliveOption,
     // 获取当前tags标签
     tags: state => state.tag.tags,
 }
